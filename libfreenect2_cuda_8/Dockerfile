@@ -32,9 +32,12 @@ RUN dpkg -i libfreenect2/depends/debs/libusb*deb && \
   apt-get -qq install --no-install-recommends -y beignet-dev && \
   dpkg -i libfreenect2/depends/debs/ocl-icd*deb
 
-RUN apt-get -qq install -y cuda-samples-8-0
+RUN apt-get -qq install -y cuda-samples-8-0 && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p libfreenect2/build && \
   cd libfreenect2/build && \
   cmake .. && \
-  make
+  make && \
+  make install
