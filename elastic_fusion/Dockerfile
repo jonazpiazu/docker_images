@@ -1,4 +1,4 @@
-FROM ros_kinetic_cuda_dev2
+FROM jonazpiazu/ros_kinetic_cuda_dev2
 
 ENV HOME /root
 WORKDIR ${HOME}/src
