@@ -34,17 +34,15 @@ RUN sed -i "/^# deb.*multiverse/ s/^# //" /etc/apt/sources.list && \
         python-pip \
         python-rosdep \
         python-wstool \
-        ros-${ROS_DISTRO}-catkin && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+        ros-${ROS_DISTRO}-catkin
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        pkg-config \
+RUN apt-get install -qq -y --no-install-recommends \
         libxau-dev \
         libxdmcp-dev \
         libxcb1-dev \
         libxext-dev \
         libx11-dev && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu16.04 \
