@@ -60,6 +60,9 @@ RUN echo '/usr/local/lib/x86_64-linux-gnu' >> /etc/ld.so.conf.d/glvnd.conf && \
     echo '/usr/local/$LIB/libGL.so.1' >> /etc/ld.so.preload && \
     echo '/usr/local/$LIB/libEGL.so.1' >> /etc/ld.so.preload
 
+# Setup ROS environment variables globally
+RUN echo 'source /opt/ros/${ROS_DISTRO}/setup.bash' >> /etc/bash.bashrc
+
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES \
     ${NVIDIA_VISIBLE_DEVICES:-all}
