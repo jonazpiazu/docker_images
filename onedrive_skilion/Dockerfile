@@ -6,6 +6,8 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # setup environment
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+ENV PUID 1000
+ENV PGID 1000
 
 WORKDIR /root/ws
 
@@ -22,6 +24,13 @@ RUN git clone https://github.com/skilion/onedrive.git \
     && make install \
     && cd .. \
     && rm -rf onedrive
+
+RUN addgroup --gid 1000 dockerusers \
+    && useradd -u 1000 -g 1000 dockeruser
+
+WORKDIR /home/dockeruser
+
+USER dockeruser
 
 VOLUME /config /onedrive
 

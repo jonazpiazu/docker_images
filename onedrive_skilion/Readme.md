@@ -3,5 +3,10 @@
 Usage:
 
 ```bash
-docker run -it -v ~/Onedrive/config:/config -v ~/Onedrive/data:/onedrive onedrive_skilion
+docker run -it \
+    -e PUID=$(id -u) \
+    -e PGID=$(id -g) \
+    -v ~/Onedrive/config:/config \
+    -v ~/Onedrive/data:/onedrive \
+    onedrive_skilion
 ```
