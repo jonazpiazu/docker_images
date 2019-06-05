@@ -27,15 +27,14 @@ RUN mkdir src && \
 
 RUN apt-get update && \
     rosdep init && \
-    rosdep update && \
+    rosdep update --include-eol-distros && \
     rosdep install -y \
       --from-paths src \
       --ignore-src \
       --rosdistro ${ROS_DISTRO} \
-      --as-root=apt:false
-
-RUN apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+      --as-root=apt:false && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN catkin config --extend /opt/ros/$ROS_DISTRO --install --install-space /opt/ros/$ROS_DISTRO && \
   catkin build
