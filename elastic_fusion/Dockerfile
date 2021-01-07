@@ -62,6 +62,7 @@ RUN cd ElasticFusion/Core && \
   cd build && \
   cmake ../src && \
   make -j8 && \
-  make install
+  make install && \
+  ldconfig
 
 ENTRYPOINT ["ElasticFusion"]
